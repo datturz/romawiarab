@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <center>
+        <h1>Angka Romawi & Arab</h1>
+        <input type="text" id="input" placeholder="Input Dulu ya">
+        <br />
+        <br />
+        <br />
+        <input type="radio" id="romawi" name="check"> <label for="romawi">Ke Romawi</label>
+        <input type="radio" id="arab" name="check"> <label for="arab">Ke Arab</label>
+        <br />
+        <br />
+        <br />
+        <button type="button" id="proses" onclick="proses()">Submit</button>
+
+        <h1 id="result"></h1>
+    </center>
+
+
+
+    <script>
+        document.getElementById("input").focus();
+        var isian = [];
+        var isian2 = 0;
+
+
+        proses = () => {
+            var x = document.getElementById("input").value;
+            if (document.getElementById("romawi").checked) {
+                if (isNaN(x) == true) {
+                    document.getElementById("result").innerHTML = "Mohon isi dengan angka !"
+                }
+                else {
+                    isian = [];
+                    if (Math.floor(x / 1000) >= 1) {
+                        for (i = 1; i <= Math.floor(x / 1000); i++) {
+                            isian.push("M");
+                        }
+                        x = x - (1000 * Math.floor(x / 1000));
+                    }
+                    if (Math.floor(x / 900) >= 1) {
+                        for (i = 1; i <= Math.floor(x / 900); i++) {
+                            isian.push("CM");
+                        }
+                        x = x - (900 * Math.floor(x / 900));
+                    }
+                    if (Math.floor(x / 500 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 500); i++) {
+                            isian.push("D");
+                        }
+                        x = x - (500 * Math.floor(x / 500));
+                    }
+                    if (Math.floor(x / 400 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 400); i++) {
+                            isian.push("CD");
+                        }
+                        x = x - (400 * Math.floor(x / 400));
+                    }
+                    if (Math.floor(x / 100 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 100); i++) {
+                            isian.push("C");
+                        }
+                        x = x - (100 * Math.floor(x / 100));
+                    }
+                    if (Math.floor(x / 90 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 90); i++) {
+                            isian.push("XC");
+                        }
+                        x = x - (90 * Math.floor(x / 90));
+                    }
+                    if (Math.floor(x / 50 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 50); i++) {
+                            isian.push("L");
+                        }
+                        x = x - (50 * Math.floor(x / 50));
+                    }
+                    if (Math.floor(x / 40 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 40); i++) {
+                            isian.push("XL");
+                        }
+                        x = x - (40 * Math.floor(x / 40));
+                    }
+                    if (Math.floor(x / 10 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 10); i++) {
+                            isian.push("X");
+                        }
+                        x = x - (10 * Math.floor(x / 10));
+                    }
+                    if (Math.floor(x / 9 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 9); i++) {
+                            isian.push("IX");
+                        }
+                        x = x - (9 * Math.floor(x / 9));
+                    }
+                    if (Math.floor(x / 5 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 5); i++) {
+                            isian.push("V");
+                        }
+                        x = x - (5 * Math.floor(x / 5));
+                    }
+                    if (Math.floor(x / 4 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 4); i++) {
+                            isian.push("IV");
+                        }
+                        x = x - (4 * Math.floor(x / 4));
+                    }
+                    if (Math.floor(x / 1 >= 1)) {
+                        for (i = 1; i <= Math.floor(x / 1); i++) {
+                            isian.push("I");
+                        }
+                        x = x - (1 * Math.floor(x / 1));
+                    }
+
+                    document.getElementById("result").innerHTML = isian.join("");
+                }
+            }
+            else if (document.getElementById("arab").checked) {
+                if (isNaN(x) == false) {
+                    document.getElementById("result").innerHTML = "Mohon isi dengan  Romawi yang benar!"
+                }
+                else {
+                    isian2 = 0;
+                    var z = x.toUpperCase()
+                    var b = z.split("");
+                    for (i = 0; i < b.length; i++) {
+                        if (b[i] == "M") {
+                            delete b[i];
+                            isian2 += 1000;
+                        }
+                        if (b[i] == "C" && b[i + 1] == "M") {
+                            delete b[i];
+                            delete b[i + 1];
+                            isian2 += 900;
+                        }
+                        if (b[i] == "D") {
+                            delete b[i];
+                            isian2 += 500;
+                        }
+                        if (b[i] == "C" && b[i + 1] == "D") {
+                            delete b[i];
+                            delete b[i + 1];
+                            isian2 += 400;
+                        }
+                        if (b[i] == "C") {
+                            delete b[i];
+                            isian2 += 100;
+                        }
+                        if (b[i] == "X" && b[i + 1] == "C") {
+                            delete b[i];
+                            delete b[i + 1];
+                            isian2 += 90;
+                        }
+                        if (b[i] == "L") {
+                            delete b[i];
+                            isian2 += 50;
+                        }
+                        if (b[i] == "X" && b[i + 1] == "L") {
+                            delete b[i];
+                            delete b[i + 1];
+                            isian2 += 40;
+                        }
+                        if (b[i] == "X") {
+                            delete b[i];
+                            isian2 += 10;
+                        }
+                        if (b[i] == "I" && b[i + 1] == "X") {
+                            delete b[i];
+                            delete b[i + 1];
+                            isian2 += 9;
+                        }
+                        if (b[i] == "V" && b[i + 1] == "I") {
+                            delete b[i];
+                            delete b[i + 1];
+                            isian2 += 6;
+                        }
+                        if (b[i] == "V") {
+                            delete b[i];
+                            res += 5;
+                        }
+                        if (b[i] == "I" && b[i + 1] == "V") {
+                            delete b[i];
+                            delete b[i + 1];
+                            isian2 += 4;
+                        }
+                        if (b[i] == "I") {
+                            delete b[i];
+                            isian2 += 1;
+                        }
+                    }
+                    document.getElementById("result").innerHTML = isian2;
+                }
+
+            }
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>
